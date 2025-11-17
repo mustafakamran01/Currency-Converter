@@ -149,8 +149,8 @@ function App() {
               label="From"
               amount={amount}
               currency={from}
-              onAmountChange={ () => setAmount(amount)}
-              onCurrencyChange={ () => setFrom(from)}
+              onAmountChange={ (amount) => setAmount(amount)}
+              onCurrencyChange={ (from) => setFrom(from)}
               currencyOptions={options}
             />
 
@@ -161,7 +161,7 @@ function App() {
             <button
               type="button"
               onClick={swap}
-              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5"                      
+              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 rounded-md bg-blue-600 text-white px-2 py-0.5"                      
             >
               Swap
             </button>
@@ -175,7 +175,7 @@ function App() {
               amount={convertedAmount}
               currency={to}
               onAmountChange={ () => setConvertedAmount(convertedAmount)}
-              onCurrencyChange={ () => setTo(to)}
+              onCurrencyChange={ (to) => setTo(to)}
               amountDisable
               currencyOptions={options}
 
@@ -183,8 +183,8 @@ function App() {
 
           </div>
 
-          <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
-            Convert
+          <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-400">
+            Convert {from.toUpperCase()} to {to.toUpperCase()}
           </button>
 
           </form>
