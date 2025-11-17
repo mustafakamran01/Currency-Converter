@@ -104,6 +104,24 @@ import useCurrencyInfo from "./hooks/useCurrencyInfo";
 
 function App() {
 
+  const [amount, setAmount] = useState(0)
+  const [convertedAmount, setConvertedAmount] = useState(0)
+  const [from, setFrom] = useState("inr")
+  const [to, setTo] = useState("usd")
+
+  const currencyInfo = useCurrencyInfo(from)
+
+  const options = Object.keys(currencyInfo)
+
+  const convert = () => {
+    setConvertedAmount(amount * currencyInfo[to])
+  }
+
+  const swap = () => {
+    setFrom(to)
+    setTo(from)
+  }
+
 
   return (
 
@@ -121,6 +139,7 @@ function App() {
           <form
             onSubmit={(e) => {
             e.preventDefault();
+            convert();
             }}
           >
 
@@ -128,6 +147,11 @@ function App() {
 
             <InputBox
               label="From"
+              amount={amount}
+              currency={from}
+              onAmountChange={ () => setAmount(amount)}
+              onCurrencyChange={ () => setFrom(from)}
+              currencyOptions={options}
             />
 
           </div>
@@ -136,6 +160,7 @@ function App() {
 
             <button
               type="button"
+              onClick={swap}
               className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5"                      
             >
               Swap
@@ -147,6 +172,12 @@ function App() {
 
             <InputBox
               label="To"
+              amount={convertedAmount}
+              currency={to}
+              onAmountChange={ () => setConvertedAmount(convertedAmount)}
+              onCurrencyChange={ () => setTo(to)}
+              amountDisable
+              currencyOptions={options}
 
             />
 
