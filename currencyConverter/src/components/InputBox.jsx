@@ -67,7 +67,13 @@ import React, { useId } from 'react'
 function InputBox({
     
     label,
-    
+    amount,
+    currency = "inr",
+    onAmountChange,
+    onCurrencyChange,
+    amountDisable = false,
+    currencyDisable = false,
+    currencyOptions = [],
     className = "",
 
 }) {
@@ -75,12 +81,12 @@ function InputBox({
     const amountInputId = useId();
 
     return (
-        <div className={`bg-white p-3 rounded-lg text-sm flex`}>
+        <div className={`bg-white p-3 rounded-lg text-sm flex ${className}`}>
 
             <div className="w-1/2">
 
                 <label htmlFor={amountInputId} className="text-black/40 mb-2 inline-block">
-                    label
+                    {label}
                 </label>
 
                 <input
@@ -88,6 +94,9 @@ function InputBox({
                     className="outline-none w-full bg-transparent py-1.5"
                     type="number"
                     placeholder="Amount"
+                    value={amount}
+                    onChange={ (e) => onAmountChange && onAmountChange(Number(e.target.value))}
+                    disabled={amountDisable}
                 />
 
             </div>
@@ -98,13 +107,17 @@ function InputBox({
 
                 <select
                     className="rounded-lg px-1 py-1 bg-gray-100 cursor-pointer outline-none"
+                    value={currency}
+                    disabled={currencyDisable}
+                    onChange={ (e) => onCurrencyChange && onCurrencyChange(e.target.value)}
                 >
                     
-                        <option value="usd">
-                            usd
-                        </option>
-                    
-                
+                        {currencyOptions.map( (currency) => (
+                            <option key={currency} value={currency}>
+                                {currency}
+                            </option>
+                        ))}
+            
                 </select>
 
             </div>
