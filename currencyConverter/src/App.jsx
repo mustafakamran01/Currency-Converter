@@ -161,7 +161,7 @@ function App() {
             <button
               type="button"
               onClick={swap}
-              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 rounded-md bg-blue-600 text-white px-2 py-0.5"                      
+              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-blue-600 text-white px-2 py-0.5 hover:bg-blue-400"                      
             >
               Swap
             </button>
