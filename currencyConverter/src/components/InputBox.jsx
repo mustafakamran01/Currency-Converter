@@ -66,6 +66,11 @@
 
 
 function InputBox({
+    label,
+    amount,
+    currency,
+    onAmountChange,
+    onCurrencyChange,
     
     
 
