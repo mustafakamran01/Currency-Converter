@@ -116,6 +116,11 @@ function App() {
     setConvertedAmount(amount * currencyInfo[to])
   }
 
+  const swap = () => {
+    setFrom(to)
+    setTo(from)
+  }
+
   return (
 
     <div
@@ -152,10 +157,11 @@ function App() {
           <div className="relative w-full h-0.5">
 
             <button
+              onClick={swap}
               type="button"
-              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-blue-600 text-white px-2 py-0.5 hover:bg-blue-400"                      
+              className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-blue-600 text-white px-2 py-0.5 hover:bg-blue-400 cursor-pointer"                      
             >
-              Swap
+              SWAP
             </button>
 
           </div>
@@ -174,8 +180,8 @@ function App() {
 
           </div>
 
-          <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-400">
-            Convert
+          <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-400 cursor-pointer">
+            Convert {from.toUpperCase()} to {to.toUpperCase()}
           </button>
 
           </form>
