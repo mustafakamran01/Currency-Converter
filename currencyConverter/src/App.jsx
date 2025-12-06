@@ -5,6 +5,23 @@ import useCurrencyInfo from "./hooks/useCurrencyInfo";
 
 function App() {
 
+  const [amount, setAmount] = useState()
+  const [from, setFrom] = useState('usd')
+  const [convertedAmount, setConvertedAmount] = useState()
+  const [to, setTo] = useState('inr')
+
+  const currencyInfo = useCurrencyInfo(from)
+
+  const currencyOptions = Object.keys(currencyInfo)
+
+  const convert = () => {
+    setConvertedAmount(amount * currencyInfo[to])
+  }
+
+  const swap = () => {
+    setFrom(to)
+    setTo(from)
+  }
 
   return (
 
@@ -22,6 +39,7 @@ function App() {
           <form
             onSubmit={(e) => {
             e.preventDefault();
+            convert();
             }}
           >
 
@@ -29,6 +47,11 @@ function App() {
 
             <InputBox
               label="From"
+              amount={amount}
+              onAmountChange={ (amount) => setAmount(amount)}
+              currency={from}
+              onCurrencychange={ (from) => setFrom(from)}
+              currencyOptions={currencyOptions}
             />
 
           </div>
@@ -37,6 +60,7 @@ function App() {
 
             <button
               type="button"
+              onClick={swap}
               className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-blue-600 text-white px-2 py-0.5 hover:bg-blue-400 cursor-pointer"                      
             >
               SWAP
@@ -48,12 +72,18 @@ function App() {
 
             <InputBox
               label="To"
+              amount={convertedAmount}
+              onAmountChange={ (convertedAmount) => setConvertedAmount(convertedAmount)}
+              currency={to}
+              onCurrencychange={ (to) => setTo(to)}
+              currencyOptions={currencyOptions}
+              amountDisable
             />
 
           </div>
 
           <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-400 cursor-pointer">
-            Convert
+            Convert {from.toUpperCase()} to {to.toUpperCase()}
           </button>
 
           </form>
